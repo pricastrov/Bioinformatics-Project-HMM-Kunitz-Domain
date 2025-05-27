@@ -6,9 +6,8 @@
 - [Repository Structure](#-repository-structure)
 - [Objectives](#-objectives)
 - [Installation](#-installation)
-- [How to Run](#-how-to-run)
+- [Methodology](#-methodology)
 - [Results](#-results)
-- [References](#-references)
 - [Contact](#-contact)
 
 ## ‍💻 Overview
