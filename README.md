@@ -20,7 +20,7 @@ This repository contains the code, datasets, and results for a project focused o
 
 Bioinformatics-Project-HMM-Kunitz-Domain/
 │
-├── data/                   # I# Input datasets
+├── data/                      # Input datasets
 │   ├── pdb_files_msa/         # PDB files used for MSA
 │   ├── preprocessed/          # Cleaned/filtered sequences
 │   └── raw/                   # Original downloaded sequences
@@ -36,7 +36,7 @@ Bioinformatics-Project-HMM-Kunitz-Domain/
 ├── scripts/                   # Custom Python scripts
 │   └── performance.py         # Script to evaluate HMM performance
 │
-└── README.md                  # s fThiil
+└── README.md                  # This file
 ```
 
 ## 📌 Objectives
