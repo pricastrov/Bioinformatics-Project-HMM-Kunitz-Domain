@@ -17,7 +17,9 @@ This repository contains the code, datasets, and results for a project focused o
 ## 📁 Repository Structure
 
 Bioinformatics-Project-HMM-Kunitz-Domain/
+
 │
+
 ├── data/                       # Input datasets
 │   ├── pdb_files_msa/         # PDB files used for MSA
 │   ├── preprocessed/          # Cleaned/filtered sequences
