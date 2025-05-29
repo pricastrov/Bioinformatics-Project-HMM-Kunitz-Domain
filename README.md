@@ -16,10 +16,12 @@ This repository contains the code, datasets, and results for a project focused o
 
 ## 📁 Repository Structure
 
+<details>
+<summary>Click to expand</summary>
+
 Bioinformatics-Project-HMM-Kunitz-Domain/
 
 │
-
 ├── data/                       # Input datasets
 │   ├── pdb_files_msa/         # PDB files used for MSA
 │   ├── preprocessed/          # Cleaned/filtered sequences
@@ -36,7 +38,9 @@ Bioinformatics-Project-HMM-Kunitz-Domain/
 ├── scripts/                   # Custom Python scripts
 │   └── performance.py         # Script to evaluate HMM performance
 │
-└── README.md                  # This file
+└── README.md                  # Thiile
+
+</details>
 
 ## 📌 Objectives
 
@@ -78,6 +82,8 @@ Make sure you have the following dependencies installed:
 **1. Upload the IDs of the representatives of the clusters to PDBeFold 
 
 ### 🔦 Construction, Validation and Evaluation of the Profile Hidden Markov Model
+
+### 📊 Results
 
 ## 📧 Contact
 
