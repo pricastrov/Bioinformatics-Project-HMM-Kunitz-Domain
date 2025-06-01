@@ -72,15 +72,59 @@ Make sure you have the following dependencies installed:
 
 **4. Use CD-HIT to cluster sequences based on sequence identity:**
 
+This is the command-line tool to cluster sequences based on sequence identity:
+
 `cd-hit -i pdb_kunitz.fasta -o pdb_kunitz.clst`
+
+✅ -i pdb_kunitz.fasta
+	•	Input file: a FASTA file (pdb_kunitz.fasta) containing protein sequences for Kunitz domains extracted from the PDB.
+
+✅ -o pdb_kunitz.clst
+	•	Output file prefix.
+	•	CD-HIT will generate:
+	•	pdb_kunitz.clst: a FASTA file with the representative sequences.
+	•	pdb_kunitz.clst.clstr: a text file showing the cluster composition (which sequences belong to which cluster).
 
 ### 📏 Multiple Structural Alignment
 
-**1. Upload the IDs of the representatives of the clusters to PDBeFold 
+**1. Upload the IDs of the representatives of the clusters to [PDBeFold] (https://www.ebi.ac.uk/msd-srv/ssm/cgi-bin/ssmserver), and select:** 
+  • Submission form/3D alignment: multiple
+  • Source: List of PDB codes
+  • Submit your query
 
 ### 🔦 Construction, Validation and Evaluation of the Profile Hidden Markov Model
 
+**1. Build the HMM Profile**
+
+Build a profile Hidden Markov Model (HMM) from a multiple sequence alignment using HMMER with the following command:
+
+`hmmbuild pdb_kunitz_nr_clean.hmm pdb_kunitz_nr_clean.ali`
+
+✅ hmmbuild
+	•	This is an HMMER tool that builds a profile HMM from a multiple sequence alignment in FASTA or Stockholm format.
+
+✅ pdb_kunitz_nr_clean.hmm
+	•	This is the output file — the HMM profile that gets created.
+
+✅ pdb_kunitz_nr_clean.ali
+	•	This is the input alignment file in FASTA format.
+
+**2. Search for Kunitz Domains in positive and negative sequences against the profile HMM**
+
+´hmmsearch -Z 1000 --max --tblout neg_1.out pdb_kunitz_nr_clean.hmm neg_1.fasta 
+hmmsearch -Z 1000 --max --tblout neg_2.out pdb_kunitz_nr_clean.hmm neg_2.fasta
+
+**3. Evaluate performance**
+
 ### 📊 Results
+
+	•	Matthews Correlation Coefficient (MCC): Up to 0.99
+	•	Optimal threshold: E-value of 1e-05 showed the best balance between sensitivity and specificity.
+	•	Structural conservation: Disulfide-bridging cysteines were highly conserved, supporting domain specificity.
+	•	See the full report in docs/report/LB1ProjectPCV.pdf.
+
+⸻
+
 
 ## 📧 Contact
 
