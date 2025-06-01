@@ -77,13 +77,13 @@ This is the command-line tool to cluster sequences based on sequence identity:
 `cd-hit -i pdb_kunitz.fasta -o pdb_kunitz.clst`
 
 ✅ -i pdb_kunitz.fasta
-	•	Input file: a FASTA file (pdb_kunitz.fasta) containing protein sequences for Kunitz domains extracted from the PDB.
+  • Input file: a FASTA file (pdb_kunitz.fasta) containing protein sequences for Kunitz domains extracted from the PDB.
 
 ✅ -o pdb_kunitz.clst
-	•	Output file prefix.
-	•	CD-HIT will generate:
-	•	pdb_kunitz.clst: a FASTA file with the representative sequences.
-	•	pdb_kunitz.clst.clstr: a text file showing the cluster composition (which sequences belong to which cluster).
+  • Output file prefix.
+  • CD-HIT will generate:
+  • pdb_kunitz.clst: a FASTA file with the representative sequences.
+  • pdb_kunitz.clst.clstr: a text file showing the cluster composition (which sequences belong to which cluster).
 
 ### 📏 Multiple Structural Alignment
 
@@ -101,27 +101,64 @@ Build a profile Hidden Markov Model (HMM) from a multiple sequence alignment usi
 `hmmbuild pdb_kunitz_nr_clean.hmm pdb_kunitz_nr_clean.ali`
 
 ✅ hmmbuild
-	•	This is an HMMER tool that builds a profile HMM from a multiple sequence alignment in FASTA or Stockholm format.
+  • This is an HMMER tool that builds a profile HMM from a multiple sequence alignment in FASTA or Stockholm format.
 
 ✅ pdb_kunitz_nr_clean.hmm
-	•	This is the output file — the HMM profile that gets created.
+  • This is the output file — the HMM profile that gets created.
 
 ✅ pdb_kunitz_nr_clean.ali
-	•	This is the input alignment file in FASTA format.
+  • This is the input alignment file in FASTA format.
 
 **2. Search for Kunitz Domains in positive and negative sequences against the profile HMM**
 
-´hmmsearch -Z 1000 --max --tblout neg_1.out pdb_kunitz_nr_clean.hmm neg_1.fasta 
-hmmsearch -Z 1000 --max --tblout neg_2.out pdb_kunitz_nr_clean.hmm neg_2.fasta
+These two commands are running HMMER’s hmmsearch tool on  positive and negative datasets to identify sequences that match your Kunitz domain HMM profile.
+
+`hmmsearch -Z 1000 --max --tblout neg_#.out pdb_kunitz_nr_clean.hmm neg_#.fasta` 
+`hmmsearch -Z 1000 --max --tblout pos_#.out pdb_kunitz_nr_clean.hmm pos_#.fasta
+
+✅ -Z 1000
+  • Sets the database size used for E-value calculations to 1000. This standardizes E-values across different queries/datasets.
+
+✅ --max
+  • Turns off all HMM heuristics and performs a full exhaustive search.
+ 
+✅ --tblout neg_#.out or --tblout pos_#.out 
+  • Outputs the result in a concise, table format to neg_#.out or pos_#.out. Useful for automated parsing.
+
+✅ pdb_kunitz_nr_clean.hmm
+  • The profile HMM you’re using for the search (in this case, representing Kunitz domain).
+
+✅ neg_#.fasta or pos_#.fasta
+  • The FASTA file of negative sequences (not expected to have the Kunitz domain) or positive sequences (expected to have the Kunitz domain).
 
 **3. Evaluate performance**
 
+Run the performance.py script with a treshold sweep from 1e-1 to 1e-12 on both test sets to evaluate how performance metrics vary with different e-value cutoffs.
+
+`for i in `seq 1 12`; do python3 performance.py set_1.class 1e-$i; done`
+
+This runs the performance.py script using 1e-$i as the e-value threshold to classify predictions:
+  • If e-value <= 1e-$i  → predict positive.
+  • If e-value > 1e-$i  → predict negative.
+
+The script then computes:
+  • Confusion matrix
+  • Q2 (accuracy)
+  • MCC (Matthews Correlation Coefficient)
+  • TPR (True Positive Rate / Sensitivity)
+  • PPV (Positive Predictive Value / Precision)
+
 ### 📊 Results
 
-	•	Matthews Correlation Coefficient (MCC): Up to 0.99
-	•	Optimal threshold: E-value of 1e-05 showed the best balance between sensitivity and specificity.
-	•	Structural conservation: Disulfide-bridging cysteines were highly conserved, supporting domain specificity.
-	•	See the full report in docs/report/LB1ProjectPCV.pdf.
+The following graph illustrates the bahavior of the MACC value of the Set 1 (cyan) and Set 2 (fuchsia) for different e_values:
+
+![Picture1](https://github.com/user-attachments/assets/684c0878-4654-4174-8b32-d77698c7a319)
+
+Final remarks:
+• Matthews Correlation Coefficient (MCC): Up to 0.99
+• Optimal threshold: E-value of 1e-05-1e-06 showed the best balance between sensitivity and specificity.
+• Structural conservation: Disulfide-bridging cysteines were highly conserved, supporting domain specificity.
+• See the full report in docs/report/LB1ProjectPCV.pdf.
 
 ⸻
 
