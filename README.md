@@ -114,7 +114,8 @@ Build a profile Hidden Markov Model (HMM) from a multiple sequence alignment usi
 These two commands are running HMMER’s hmmsearch tool on  positive and negative datasets to identify sequences that match your Kunitz domain HMM profile.
 
 `hmmsearch -Z 1000 --max --tblout neg_#.out pdb_kunitz_nr_clean.hmm neg_#.fasta` 
-`hmmsearch -Z 1000 --max --tblout pos_#.out pdb_kunitz_nr_clean.hmm pos_#.fasta
+
+`hmmsearch -Z 1000 --max --tblout pos_#.out pdb_kunitz_nr_clean.hmm pos_#.fasta`
 
 ✅ -Z 1000
   • Sets the database size used for E-value calculations to 1000. This standardizes E-values across different queries/datasets.
