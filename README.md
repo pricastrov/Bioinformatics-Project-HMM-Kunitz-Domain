@@ -136,7 +136,7 @@ These two commands are running HMMER’s hmmsearch tool on  positive and negativ
 
 Run the performance.py script with a treshold sweep from 1e-1 to 1e-12 on both test sets to evaluate how performance metrics vary with different e-value cutoffs.
 
-`for i in \`seq 1 12\`; do python3 performance.py set_1.class 1e-$i; done`
+`for i in ``seq 1 12``; do python3 performance.py set_1.class 1e-$i; done`
 
 This runs the performance.py script using 1e-$i as the e-value threshold to classify predictions:
   • If e-value <= 1e-$i  → predict positive.
