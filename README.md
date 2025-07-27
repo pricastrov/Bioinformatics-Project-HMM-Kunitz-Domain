@@ -151,7 +151,7 @@ The script then computes:
 
 ### 📊 Results
 
-The following graph illustrates the bahavior of the MACC value of the Set 1 (cyan) and Set 2 (fuchsia) for different e_values:
+The following graph illustrates the bahavior of the MCC value of the Set 1 (cyan) and Set 2 (fuchsia) for different e_values:
 
 ![Picture1](https://github.com/user-attachments/assets/684c0878-4654-4174-8b32-d77698c7a319)
 
